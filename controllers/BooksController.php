@@ -15,24 +15,25 @@ class BooksController extends ActiveController
         'collectionEnvelope' => 'items',
     ];
 
-    // public function actions()
-    // {
-    //     $actions = parent::actions();
+    public function actions()
+    {
+        $actions = parent::actions();
 
-    //     // отключить действия "delete" и "create"
-    //     // unset($actions['delete'], $actions['create']);
+        // отключить действия "delete" и "create"
+        // unset($actions['delete'], $actions['create']);
 
-    //     // настроить подготовку провайдера данных с помощью метода "prepareDataProvider()"
-    //     $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+        // настроить подготовку провайдера данных с помощью метода "prepareDataProvider()"
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
 
-    //     return $actions;
-    // }
+        return $actions;
+    }
 
-
-    // public function actionCreate() {
-    //     $request=Yii::$app->request->post('Books'); //For PHP > 5.4
-
-    //     Yii::debug($request);
-    // }
-
+    public function prepareDataProvider()
+    {
+        $searchModel = new \app\models\BooksSearch();    
+        Yii::debug(Yii::$app->request->queryParams);
+        return $searchModel->search(\Yii::$app->request->queryParams);
+    
+        // подготовить и вернуть провайдер данных для действия "index"
+    }
 }

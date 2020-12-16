@@ -2,21 +2,59 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
+use Yii;
 
-class Books extends ActiveRecord
+/**
+ * This is the model class for table "books".
+ *
+ * @property int $id
+ * @property string|null $title
+ * @property string|null $description
+ * @property int|null $author_id
+ */
+class Books extends \yii\db\ActiveRecord
 {
-    public function scenarios()
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
     {
-        return [
-            self::SCENARIO_DEFAULT => ['id', 'title', 'author'],
-        ];
+        return 'books';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['id', 'title', 'author'], 'safe'],
+            [['description'], 'string'],
+            [['author_id'], 'default', 'value' => null],
+            [['author_id'], 'integer'],
+            [['title'], 'string', 'max' => 255],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => "author", 'targetAttribute' => ['author_id' => 'id']],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'title' => 'Title',
+            'description' => 'Description',
+            'author_id' => 'Author ID',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return BooksQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new BooksQuery(get_called_class());
     }
 }
