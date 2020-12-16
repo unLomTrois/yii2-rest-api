@@ -14,6 +14,8 @@
 
 В качестве БД использовал PostgreSQL, где создал две простые таблицы books и author, связаные один-ко-многим по ключу author_id таблицы books.
 
+Залил всё на Heroku по ссылке https://yii2-rest-api.herokuapp.com/books.
+
 # Исходная формулировка задания:
 
 Написать простенькое REST API с использованием Yii2 framework.
