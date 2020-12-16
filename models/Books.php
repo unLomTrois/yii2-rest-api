@@ -51,7 +51,7 @@ class Books extends \yii\db\ActiveRecord
 
                     return [
                         "name" => $author["name"],
-                        "id" => $author["id"],
+                        // "id" => $author["id"],
                     ];
                 }
                 return "Неизвестно";
