@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Books]].
+ * This is the ActiveQuery class for [[Author]].
  *
- * @see Books
+ * @see Author
  */
-class BooksQuery extends \yii\db\ActiveQuery
+class AuthorQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,21 +16,16 @@ class BooksQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Books[]|array
+     * @return Author[]|array
      */
     public function all($db = null)
     {
         return parent::all($db);
     }
 
-    public function firstThree($db = null)
-    {
-        return array_slice(parent::all($db), 0, 3);
-    }
-
     /**
      * {@inheritdoc}
-     * @return Books|array|null
+     * @return Author|array|null
      */
     public function one($db = null)
     {

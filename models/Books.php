@@ -32,7 +32,30 @@ class Books extends \yii\db\ActiveRecord
             [['author_id'], 'default', 'value' => null],
             [['author_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => "author", 'targetAttribute' => ['author_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['author_id' => 'id']],
+        ];
+    }
+
+    public function fields()
+    {
+        return [
+            'id',
+            'title',
+            'description',
+            'author' => function () {
+
+                if ($this->author_id !== null) {
+                    $author = Author::find()
+                        ->where(['id' => $this->author_id])
+                        ->one();
+
+                    return [
+                        "name" => $author["name"],
+                        "id" => $author["id"],
+                    ];
+                }
+                return "Неизвестно";
+            }
         ];
     }
 
