@@ -12,6 +12,18 @@ class BooksController extends ActiveController
     //     'class' => 'yii\rest\Serializer',
     //     'collectionEnvelope' => 'items',
     // ];
+    public function behaviors()
+    {
+
+        return [
+            [
+                'class' => \yii\filters\ContentNegotiator::class,
+                'formats' => [
+                    'application/json' => \yii\web\Response::FORMAT_JSON,
+                ],
+            ],
+        ];
+    }
 
     public function actions()
     {
